@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NurseShift Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "vitest": "https://aistudiocdn.com/vitest@^4.0.15"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <div id="password-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f0f0f0; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: sans-serif;">
+  <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;">
+    <h2 style="margin-top: 0;">パスワードを入力</h2>
+    <input type="password" id="password-input" placeholder="Password" style="padding: 8px; font-size: 16px; margin-bottom: 10px; width: 200px;">
+    <br>
+    <button onclick="checkPassword()" style="padding: 8px 16px; font-size: 16px; background-color: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer;">解除</button>
+    <p id="error-msg" style="color: red; display: none; margin-top: 10px;">パスワードが違います</p>
+  </div>
+</div>
+
+<script>
+  function checkPassword() {
+    // ★ここに好きなパスワードを設定してください
+    const secret = "1234"; 
+
+    const input = document.getElementById('password-input').value;
+    const overlay = document.getElementById('password-overlay');
+    const errorMsg = document.getElementById('error-msg');
+
+    if (input === secret) {
+      // パスワード正解：オーバーレイを消す
+      overlay.style.display = 'none';
+      // ログイン状態を保存したい場合は以下を有効化
+      // sessionStorage.setItem('isLoggedIn', 'true');
+    } else {
+      // パスワード不正解
+      errorMsg.style.display = 'block';
+    }
+  }
+  
+  // (オプション) 一度ログインしたらリロードしても維持する場合
+  // if (sessionStorage.getItem('isLoggedIn') === 'true') {
+  //   document.getElementById('password-overlay').style.display = 'none';
+  // }
+</script>
+</html>
